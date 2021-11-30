@@ -23,5 +23,7 @@ public class PosMachine {
         return ItemDataLoader.loadAllItemInfos();
     }
 
-    
+    private int calculateSubtotal(int unitPrice, int quantity) {
+        return unitPrice * quantity;
+    }
 }
