@@ -8,7 +8,7 @@ import java.util.Map;
 public class PosMachine {
     public String printReceipt(List<String> barcodes) {
         Map<String, Integer> quantityList = countItem(barcodes);
-        return null;
+        return generateReceipt(quantityList);
     }
 
     private Map<String, Integer> countItem(List<String> barcodeList) {
@@ -17,6 +17,24 @@ public class PosMachine {
             result.merge(item, 1, Integer::sum);
         }
         return result;
+    }
+
+    private String generateReceipt(Map<String, Integer> quantityList) {
+        List<ItemInfo> databaseList = loadAllItemsInfo();
+
+        ArrayList<Integer> subtotalList = new ArrayList<>();
+
+        StringBuilder finalContent = new StringBuilder("***<store earning no money>Receipt***\n");
+        for(ItemInfo item : databaseList) {
+            if (quantityList.get(item.getBarcode()) != null) {
+                int subtotal = calculateSubtotal(item.getPrice(), quantityList.get(item.getBarcode()));
+                subtotalList.add(subtotal);
+                finalContent.append(generateItem(item, quantityList.get(item.getBarcode()), subtotal));
+            }
+        }
+        finalContent.append(String.format("----------------------\nTotal: %d (yuan)\n**********************", calculateTotal(subtotalList)));
+
+        return finalContent.toString();
     }
 
     private List<ItemInfo> loadAllItemsInfo() {
