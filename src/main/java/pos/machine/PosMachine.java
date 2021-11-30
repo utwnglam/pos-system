@@ -26,4 +26,9 @@ public class PosMachine {
     private int calculateSubtotal(int unitPrice, int quantity) {
         return unitPrice * quantity;
     }
+
+    private String generateItem(ItemInfo item, int quantity, int subtotal) {
+        return String.format("Name: %s, Quantity: %d, Unit price: %d (yuan), Subtotal: %d (yuan)\n", item.getName(), quantity, item.getPrice(), subtotal);
+    }
+
 }
