@@ -19,5 +19,9 @@ public class PosMachine {
         return result;
     }
 
+    private List<ItemInfo> loadAllItemsInfo() {
+        return ItemDataLoader.loadAllItemInfos();
+    }
 
+    
 }
