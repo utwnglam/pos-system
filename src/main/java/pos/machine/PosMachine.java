@@ -31,4 +31,11 @@ public class PosMachine {
         return String.format("Name: %s, Quantity: %d, Unit price: %d (yuan), Subtotal: %d (yuan)\n", item.getName(), quantity, item.getPrice(), subtotal);
     }
 
+    private int calculateTotal(ArrayList<Integer> subtotalList) {
+        int total = 0;
+        for (int subtotal : subtotalList) {
+            total += subtotal;
+        }
+        return total;
+    }
 }
